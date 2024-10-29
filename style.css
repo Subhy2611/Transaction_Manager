@@ -1,0 +1,192 @@
+/* style.css */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background-color: #f0f4fc;
+}
+
+.main-container {
+    display: flex;
+    width: 80%;
+    max-width: 1200px;
+    background-color: white;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.left-section {
+    flex: 1;
+    padding: 40px;
+    background-color: #fff;
+    color: #333;
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Centers items horizontally */
+    justify-content: center; /* Centers items vertically */
+    height: 800px;
+}
+
+.logo h1 {
+    font-size: 24px;
+    color: #0072ff;
+    margin-bottom: 20px;
+}
+
+.signup-form h2 {
+    font-size: 24px;
+    margin-bottom: 10px;
+}
+
+.signup-form p {
+    font-size: 14px;
+    color: #888;
+    margin-bottom: 20px;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    width: 100%;
+}
+
+.form-row {
+    display: flex;
+    gap: 10px;
+}
+
+input[type="text"],
+input[type="date"],
+input[type="email"],
+input[type="password"] {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    background-color: #f9f9f9;
+    color: #333;
+}
+
+input[type="text"]::placeholder,
+input[type="date"]::placeholder,
+input[type="email"]::placeholder,
+input[type="password"]::placeholder {
+    color: #888;
+}
+
+button {
+    padding: 10px;
+    border: none;
+    border-radius: 4px;
+    background-color: #0072ff;
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #005ecb;
+}
+/* General styling for the form */
+.signup-form {
+    width: 80%;
+    margin: 0 auto;
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+/* Label styling */
+.form-group label {
+    display: block;
+    font-size: 14px;
+    margin-bottom: 5px;
+    color: #444;
+}
+
+/* Input styling */
+.form-group input {
+    width: 100%;
+    padding: 8px;
+    font-size: 14px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.form-row {
+    display: flex;
+    gap: 20px;
+}
+
+.form-row .form-group {
+    flex: 1;
+}
+
+/* Button styling */
+button[type="submit"] {
+    width: 100%;
+    padding: 10px;
+    background-color: #0072ff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+button[type="submit"]:hover {
+    background-color: #005bb5;
+}
+
+.login-link {
+    margin-top: 15px;
+    font-size: 14px;
+    color: #aaa;
+}
+
+.login-link a {
+    color: #0072ff;
+    text-decoration: none;
+}
+
+.login-link a:hover {
+    text-decoration: underline;
+}
+
+.right-section {
+    flex: 1;
+    background-color: #f3f9ff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative; /* Ensures the image wrapper is positioned relative to this container */
+}
+
+.image-wrapper {
+    /* width: 91%; Adjust width as needed
+    height: 68%; Adjust height as needed */
+    background-color: black;
+    border-radius: 12px;
+    border: 5px solid #000000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    transform: translate(20%, 0); /* Moves image 30% to the right */
+}
+
+.image-wrapper img {
+    max-width: 100%;
+    max-height: 100%;
+    border-radius: 8px; /* Optional for slight rounding on the image itself */
+}

@@ -1,0 +1,181 @@
+/* Global styles */
+body {
+    font-family: Arial, sans-serif;
+    display: flex;
+    margin: 0;
+    padding: 0;
+    background-color: #f5f7f9;
+}
+
+/* Sidebar */
+.sidebar {
+    width: 15vw;
+    background-color: #ffffff;
+    padding: 1%;
+    border-right: 1px solid #e6e8eb;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100vh; /* Full viewport height */
+    position: fixed; /* Fix sidebar position */
+    left: 0; /* Align sidebar to the left */
+    top: 0; /* Align sidebar to the top */
+    overflow-y: auto; /* Optional: Adds scrollbar to sidebar if content exceeds screen height */
+    box-sizing: border-box;
+}
+
+.sidebar img.logo {
+    width: 150px;
+    margin-bottom: 20px;
+    margin-top: 20px;
+    align-self: center;
+}
+
+.sidebar nav ul {
+    list-style-type: none;
+    margin-left: 20px;
+    padding: 0;
+}
+
+.sidebar nav ul li {
+    margin: 15px 0;
+}
+
+.sidebar nav ul li a {
+    text-decoration: none;
+    color: #333;
+    display: flex;
+    align-items: center;
+    font-size: 16px;
+}
+
+.sidebar nav ul li a.selected {
+    color: #007bff;
+    font-weight: bold;
+}
+
+.sidebar .logout {
+    width: 26px;
+}
+
+/* Main content */
+.main-content {
+    flex-grow: 1;
+    padding: 40px;
+    background-color: #f9fbfd;
+    /* max-width: 700px; */
+    margin-left: 15vw; /* Offset main content by sidebar width */
+    overflow-y: auto; /* Enable scrolling for main content */
+}
+
+.main-content h1 {
+    font-size: 24px;
+    font-weight: 600;
+    margin-bottom: 10px;
+}
+
+.main-content p {
+    font-size: 14px;
+    color: #666;
+    margin-bottom: 30px;
+}
+
+/* Form styling */
+form {
+    margin: 0; /* Remove centering */
+    width: 70%;
+}
+
+.form-section {
+    margin-bottom: 20px;
+}
+
+.form-section h2 {
+    font-size: 18px;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 5px;
+}
+
+.form-section p {
+    font-size: 14px;
+    color: #666;
+    margin-bottom: 15px;
+}
+
+.form-group {
+    display: flex;
+    align-items: center;
+    /* margin-bottom: 20px; */
+}
+
+hr {
+    border: 1px solid #eee;
+    margin: 20px 0;
+}
+
+label {
+    width: 300px;
+    font-size: 14px;
+    color: #333;
+    margin-right: 10px;
+    text-align: right;
+}
+
+input, select, textarea {
+    flex-grow: 1;
+    padding: 10px;
+    font-size: 14px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+select {
+    cursor: pointer;
+}
+
+textarea {
+    height: 80px;
+    resize: none;
+    font-size: 14px;
+    line-height: 1.5;
+}
+
+.transfer-button {
+    width: 100%;
+    padding: 12px;
+    font-size: 16px;
+    color: #fff;
+    background-color: #007bff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: bold;
+    margin-top: 20px;
+}
+
+/* User details */
+.user-details {
+    display: flex;
+    align-items: center;
+    padding: 15px 1%;
+    border-top: 1px solid #e6e8eb;
+}
+
+.user-details img.profile-pic {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    margin-right: 10px;
+}
+
+.user-details .user-info {
+    font-size: 14px;
+}
+
+.user-details img.logout {
+    margin-left: auto;
+    cursor: pointer;
+    width: 26px;
+}

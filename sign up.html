@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sign Up</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="main-container">
+      <div class="left-section">
+        <div class="logo">
+          <h1>Horizon</h1>
+        </div>
+        <div class="signup-form">
+          <h2>Sign up</h2>
+          <p>Please enter your details.</p>
+          <form>
+            <div class="form-row">
+              <div class="form-group">
+                <label for="firstname">First Name</label>
+                <input
+                  type="text"
+                  placeholder="First Name"
+                  value="John"
+                  required
+                />
+              </div>
+              <div class="form-group">
+                <label for="lastname">Last Name</label>
+                <input type="text" placeholder="Last Name" required />
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="address">Address</label>
+              <input type="text" placeholder="Address" required />
+            </div>
+
+            <div class="form-row">
+              <div class="form-group">
+                <label for="state">State</label>
+                <input type="text" placeholder="State" required />
+              </div>
+              <div class="form-group">
+                <label for="postal">Postal Code</label>
+                <input type="text" placeholder="Postal Code" required />
+              </div>
+            </div>
+
+            <div class="form-row">
+              <div class="form-group">
+                <label for="date">Date of Birth</label>
+                <input type="date" placeholder="Date of Birth" required />
+              </div>
+              <div class="form-group">
+                <label for="ssn">SSN</label>
+                <input type="text" placeholder="SSN" required />
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="email">Email</label>
+              <input type="email" placeholder="Email" required />
+            </div>
+
+            <div class="form-group">
+              <label for="password">Password</label>
+              <input type="password" placeholder="Password" required />
+            </div>
+
+            <button type="submit">Sign up</button>
+          </form>
+          <p class="login-link">Already have an account? <a href="#">Login</a></p>
+        </div>
+      </div>
+      <div class="right-section">
+        <div class="image-wrapper">
+          <img src="./Resources/login right image1.png" alt="Image" />
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
