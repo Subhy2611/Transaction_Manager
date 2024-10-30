@@ -1,4 +1,4 @@
-/* style.css */
+/* Base Styles */
 * {
     box-sizing: border-box;
     margin: 0;
@@ -14,6 +14,7 @@ body {
     background-color: #f0f4fc;
 }
 
+/* Container Styling */
 .main-container {
     display: flex;
     width: 80%;
@@ -31,8 +32,8 @@ body {
     color: #333;
     display: flex;
     flex-direction: column;
-    align-items: center; /* Centers items horizontally */
-    justify-content: center; /* Centers items vertically */
+    align-items: center;
+    justify-content: center;
     height: 800px;
 }
 
@@ -40,6 +41,130 @@ body {
     font-size: 24px;
     color: #0072ff;
     margin-bottom: 20px;
+}
+
+/* Sidebar Styling */
+.sidebar {
+    width: 250px;
+    background-color: #f5f6f8;
+    padding: 20px;
+}
+
+.sidebar h2 {
+    font-size: 1.5rem;
+    color: #1d4ed8;
+    margin-bottom: 20px;
+}
+
+.sidebar nav ul {
+    list-style: none;
+}
+
+.sidebar nav ul li {
+    padding: 10px 0;
+    color: #333;
+}
+
+.sidebar nav ul li a {
+    text-decoration: none;
+    color: inherit;
+}
+
+.sidebar nav ul .active a {
+    font-weight: bold;
+    color: #1d4ed8;
+}
+
+.sidebar .profile {
+    margin-top: auto;
+    padding-top: 20px;
+}
+
+.sidebar .profile img {
+    width: 50px;
+    border-radius: 50%;
+    margin-right: 10px;
+}
+
+.sidebar .profile p {
+    margin-top: 10px;
+    font-size: 0.9rem;
+}
+
+/* Main Content Styling */
+.main-content {
+    flex-grow: 1;
+    padding: 20px;
+    background-color: #ffffff;
+}
+
+header h1 {
+    font-size: 2rem;
+    color: #1d4ed8;
+}
+
+header p {
+    margin-top: 5px;
+    color: #666;
+}
+
+/* Card Container */
+.cards-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: space-between;
+    margin-top: 20px;
+}
+
+/* Card Styling */
+.card {
+    background-color: #eef2ff;
+    padding: 20px;
+    border-radius: 10px;
+    width: calc(33.333% - 20px);
+    min-width: 250px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.card.blue {
+    background: linear-gradient(135deg, #60a5fa, #2563eb);
+}
+
+.card.purple {
+    background: linear-gradient(135deg, #a78bfa, #7c3aed);
+}
+
+.card .bank-name, .card .card-holder, .card .card-number, .card .spending {
+    color: #ffffff;
+    margin: 5px 0;
+}
+
+.home-content {
+    margin-top: 20px;
+}
+
+.home-content h2 {
+    color: #1d4ed8;
+}
+
+/* Responsive Design for Cards */
+@media (max-width: 768px) {
+    .card {
+        width: calc(50% - 20px);
+    }
+}
+
+@media (max-width: 480px) {
+    .card {
+        width: 100%;
+    }
+}
+
+/* Form Styling */
+.signup-form {
+    width: 80%;
+    margin: 0 auto;
 }
 
 .signup-form h2 {
@@ -84,6 +209,7 @@ input[type="password"]::placeholder {
     color: #888;
 }
 
+/* Button Styling */
 button {
     padding: 10px;
     border: none;
@@ -97,43 +223,7 @@ button {
 button:hover {
     background-color: #005ecb;
 }
-/* General styling for the form */
-.signup-form {
-    width: 80%;
-    margin: 0 auto;
-}
 
-.form-group {
-    margin-bottom: 15px;
-}
-
-/* Label styling */
-.form-group label {
-    display: block;
-    font-size: 14px;
-    margin-bottom: 5px;
-    color: #444;
-}
-
-/* Input styling */
-.form-group input {
-    width: 100%;
-    padding: 8px;
-    font-size: 14px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-}
-
-.form-row {
-    display: flex;
-    gap: 20px;
-}
-
-.form-row .form-group {
-    flex: 1;
-}
-
-/* Button styling */
 button[type="submit"] {
     width: 100%;
     padding: 10px;
@@ -163,18 +253,17 @@ button[type="submit"]:hover {
     text-decoration: underline;
 }
 
+/* Additional Section Styling */
 .right-section {
     flex: 1;
     background-color: #f3f9ff;
     display: flex;
     justify-content: center;
     align-items: center;
-    position: relative; /* Ensures the image wrapper is positioned relative to this container */
+    position: relative;
 }
 
 .image-wrapper {
-    /* width: 91%; Adjust width as needed
-    height: 68%; Adjust height as needed */
     background-color: black;
     border-radius: 12px;
     border: 5px solid #000000;
@@ -182,11 +271,11 @@ button[type="submit"]:hover {
     justify-content: center;
     align-items: center;
     overflow: hidden;
-    transform: translate(20%, 0); /* Moves image 30% to the right */
+    transform: translate(20%, 0);
 }
 
 .image-wrapper img {
     max-width: 100%;
     max-height: 100%;
-    border-radius: 8px; /* Optional for slight rounding on the image itself */
+    border-radius: 8px;
 }
