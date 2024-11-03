@@ -45,50 +45,58 @@ body {
 
 /* Sidebar Styling */
 .sidebar {
-    width: 250px;
-    background-color: #f5f6f8;
-    padding: 20px;
+    width: 15vw;
+    background-color: #ffffff;
+    padding: 1%;
+    border-right: 1px solid #e6e8eb;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100vh;
+    position: fixed;
+    left: 0;
+    top: 0;
+    overflow-y: auto;
+    box-sizing: border-box;
 }
 
-.sidebar h2 {
-    font-size: 1.5rem;
-    color: #1d4ed8;
+.sidebar img.logo {
+    width: 150px;
     margin-bottom: 20px;
+    margin-top: 20px;
+    align-self: center;
 }
 
 .sidebar nav ul {
-    list-style: none;
+    list-style-type: none;
+    margin-left: 20px;
+    padding: 0;
 }
 
 .sidebar nav ul li {
-    padding: 10px 0;
-    color: #333;
+    margin: 15px 0;
 }
 
 .sidebar nav ul li a {
     text-decoration: none;
-    color: inherit;
+    color: #333;
+    display: flex;
+    align-items: center;
+    font-size: 16px;
 }
 
-.sidebar nav ul .active a {
+.sidebar nav ul li a.selected {
+    color: #007bff;
     font-weight: bold;
-    color: #1d4ed8;
 }
 
-.sidebar .profile {
-    margin-top: auto;
-    padding-top: 20px;
+.sidebar .logout {
+    width: 26px;
 }
 
-.sidebar .profile img {
-    width: 50px;
-    border-radius: 50%;
-    margin-right: 10px;
-}
-
-.sidebar .profile p {
-    margin-top: 10px;
-    font-size: 0.9rem;
+.sidebar nav ul li a:hover {
+    background-color: rgba(200, 200, 200, 0.5);
+    border-radius: 10px;
 }
 
 /* Main Content Styling */

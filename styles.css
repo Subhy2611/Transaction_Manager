@@ -16,11 +16,11 @@ body {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    height: 100vh; /* Full viewport height */
-    position: fixed; /* Fix sidebar position */
-    left: 0; /* Align sidebar to the left */
-    top: 0; /* Align sidebar to the top */
-    overflow-y: auto; /* Optional: Adds scrollbar to sidebar if content exceeds screen height */
+    height: 100vh;
+    position: fixed;
+    left: 0;
+    top: 0;
+    overflow-y: auto;
     box-sizing: border-box;
 }
 
@@ -56,6 +56,11 @@ body {
 
 .sidebar .logout {
     width: 26px;
+}
+
+.sidebar nav ul li a:hover {
+    background-color: rgba(200, 200, 200, 0.5);
+    border-radius: 10px;
 }
 
 /* User details */
