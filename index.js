@@ -3,10 +3,18 @@ const express = require('express');
 const path = require('path')
 const app = express();
 const port = 3000;
+const session = require('express-session'); // To manage sessions
 
 app.use(express.static(path.join(__dirname, './Static')));
 
 app.use(express.urlencoded({ extended: true }));  // To parse form data, to add data to the database
+
+// Set up session middleware
+app.use(session({
+    secret: 'yourSecretKey',
+    resave: false,
+    saveUninitialized: true
+}));
 
 ///////////////// MongoDB Connection //////////////////
 mongoose.connect('mongodb://127.0.0.1/bankdb');
@@ -29,7 +37,29 @@ const userSchema = new mongoose.Schema({
     email: String,
     password: String
 })
-var myaccounts = db.model('usercollection', userSchema);
+var dbusers = db.model('usercollection', userSchema);
+
+const accountSchema = new mongoose.Schema({
+    email: String,
+    accountnumber: Number,
+    bankname: String,
+    customernumber: Number,
+    accounttype: String,
+    accountbalance: Number,
+    openingdate: Date
+})
+var dbaccounts = db.model('accountscollection', accountSchema);
+
+const transactionSchema = new mongoose.Schema({
+    senderemail: String,
+    senderbank: String,
+    note: String,
+    senderaccountnum: Number,
+    receipientemailaddress: String,
+    recepientaccountnumber: Number,
+    amount: Number
+})
+var dbtransaction = db.model('transactioncollection', transactionSchema);
 ///////////////// End of MongoDB Connection //////////////////
 
 
@@ -42,11 +72,12 @@ app.post('/login', async (req, res) => {
         const email = req.body.email;
         const password = req.body.password;
         console.log(email, password);
-        const user = await myaccounts.findOne({ email: email });
+        const user = await dbusers.findOne({ email: email });
         console.log(user);
         if (user && user.password === password) {
             console.log('User login successful');
-            res.send('<script>alert("User login successful");window.open("/", "_self");</script>');
+            req.session.myVariable = user.email;
+            res.send('<script>alert("User login successful");window.open("/dashboard", "_self");</script>');
         } else {
             console.log('Invalid email or password');
             res.send('<script>alert("Invalid email or password");window.open("/", "_self");</script>');
@@ -64,7 +95,7 @@ app.get('/signup', (req, res) => {
 app.post('/adduser', async (req, res) => {
     try {
         // Create a new account document from form data
-        const newUser = new myaccounts({
+        const newUser = new dbusers({
             firstname: req.body.firstname,
             lastname: req.body.lastname,
             address: req.body.address,
@@ -86,6 +117,30 @@ app.post('/adduser', async (req, res) => {
         console.error('Error adding user:', err);
         res.status(500).send('Error adding user');
     }
+});
+
+app.get('/dashboard', (req, res) => {
+    if(req.session.myVariable){
+        res.sendFile(path.join(__dirname, './Static/dashboard.html'));
+    }
+    else{
+        res.send('<script>alert("Please login first");window.open("/", "_self");</script>');
+    }
+});
+
+app.get('/payment_transfer', (req, res) => {
+    if(req.session.myVariable){
+        res.sendFile(path.join(__dirname, './Static/payment_transfer.html'));
+    }
+    else{
+        res.send('<script>alert("Please login first");window.open("/", "_self");</script>');
+    }
+});
+
+app.get('/logout', (req, res) => {
+    req.session.destroy();
+    console.log('User logged out');
+    res.redirect('/');
 });
 
 app.listen(port, () => {
