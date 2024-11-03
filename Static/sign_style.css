@@ -327,3 +327,11 @@ button[type="submit"]:hover {
     opacity: 1;
 }
 
+/* Tooltip Image Styling */
+.tooltip-img {
+    width: 16.5px;
+    height: auto;
+    vertical-align: middle;
+}
+
+
