@@ -43,6 +43,63 @@ body {
     margin-bottom: 20px;
 }
 
+/* Sidebar Styling */
+.sidebar {
+    width: 15vw;
+    background-color: #ffffff;
+    padding: 1%;
+    border-right: 1px solid #e6e8eb;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100vh;
+    position: fixed;
+    left: 0;
+    top: 0;
+    overflow-y: auto;
+    box-sizing: border-box;
+}
+
+.sidebar img.logo {
+    width: 150px;
+    margin-bottom: 20px;
+    margin-top: 20px;
+    align-self: center;
+}
+
+.sidebar nav ul {
+    list-style-type: none;
+    margin-left: 20px;
+    padding: 0;
+}
+
+.sidebar nav ul li {
+    margin: 15px 0;
+}
+
+.sidebar nav ul li a {
+    text-decoration: none;
+    color: #333;
+    display: flex;
+    align-items: center;
+    font-size: 16px;
+    padding: 10px 16px;
+}
+
+.sidebar nav ul li a.selected {
+    color: #007bff;
+    font-weight: bold;
+}
+
+.sidebar .logout {
+    width: 26px;
+}
+
+.sidebar nav ul li a:hover {
+    background-color: rgba(200, 200, 200, 0.5);
+    border-radius: 10px;
+}
+
 /* Main Content Styling */
 .main-content {
     flex-grow: 1;
@@ -60,62 +117,51 @@ header p {
     color: #666;
 }
 
-.home-content {
-    margin-top: 20px;
-}
-
-.home-content h2 {
-    color: #1d4ed8;
-}
-
 /* Form Styling */
-.signup-form {
+.connect-bank-form {
     width: 80%;
     margin: 0 auto;
 }
 
-.signup-form h2 {
-    font-size: 24px;
+.connect-bank-form h2 {
+    font-size: 20px;
     margin-bottom: 10px;
 }
 
-.signup-form p {
+.connect-bank-form p {
     font-size: 14px;
-    color: #888;
+    color: gray;
     margin-bottom: 20px;
 }
 
 form {
     display: flex;
     flex-direction: column;
-    gap: 15px;
+    gap: 20px; /* Ensure there is space between form elements */
     width: 100%;
 }
 
-.form-row {
+.form-group {
     display: flex;
-    gap: 10px;
+    flex-direction: column; /* Align label and input vertically */
 }
 
+.form-group label{
+    margin-bottom: 7px;
+}
+
+/* Adjust Input Field Sizes */
 input[type="text"],
 input[type="number"],
-input[type="date"],
-input[type="email"],
-input[type="password"] {
-    width: 100%;
-    padding: 10px;
+input[type="month"],
+select {
+    width: 100%; /* Ensure it takes full width */
+    padding: 15px; /* Increase padding */
     border: 1px solid #ddd;
     border-radius: 4px;
     background-color: #f9f9f9;
     color: #333;
-}
-
-input[type="text"]::placeholder,
-input[type="number"]::placeholder,
-input[type="date"]::placeholder,
-input[type="email"]::placeholder,
-input[type="password"]::placeholder {
-    color: #888;
+    font-size: 16px; /* Increase font size for better readability */
 }
 
 /* Button Styling */
@@ -199,39 +245,24 @@ button[type="submit"]:hover {
     float: right;
 }
 
-/* Tooltip Text */
-.tooltip::after {
-    content: "Social Security Number - A unique number typically provided by the bank in your email or registered phone number.";
-    position: absolute;
-    bottom: 100%;
-    left: 50%;
-    transform: translateX(-50%);
-    background-color: #333;
-    color: #fff;
-    padding: 8px;
+.account-number {
+    display: flex;
+    align-items: center;
+    gap: 5px; /* Space between input fields and hyphens */
+}
+
+.account-number input[type="text"] {
+    width: 50px; /* Set width to fit exactly 4 characters */
+    padding: 5px;
+    text-align: center;
+    border: 1px solid #ddd;
     border-radius: 4px;
-    font-size: 12px;
-    visibility: hidden;
-    opacity: 0;
-    transition: opacity 0.2s ease, visibility 0.2s ease;
-    pointer-events: none;
-    width: 150px; /* Increased width for a larger box */
-    white-space: normal; /* Allow text to wrap */
-    text-align: left; /* Align text to the left for readability */
-    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2); /* Added shadow for emphasis */
+    font-size: 14px;
 }
 
-/* Show Tooltip on Hover */
-.tooltip:hover::after {
-    visibility: visible;
-    opacity: 1;
+.hyphen {
+    font-size: 18px;
+    color: #333;
+    margin: 0 2px; /* Adjusts space around the hyphen */
 }
-
-/* Tooltip Image Styling */
-.tooltip-img {
-    width: 16.5px;
-    height: auto;
-    vertical-align: middle;
-}
-
 

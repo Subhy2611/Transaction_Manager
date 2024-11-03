@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <link rel="stylesheet" href="sidebar.css">
+    <link rel="stylesheet" href="transaction_history.css">
+</head>
+<body>
+    <!-- Sidebar -->
+    <div class="sidebar">
+        <img src="./Resources/horizon logo.png" alt="Logo" class="logo">
+        <nav>
+            <ul>
+                <li><a href="#">Home</a></li>
+                <li><a href="#">My Banks</a></li>
+                <li><a href="#"  class="selected">Transaction History</a></li>
+                <li><a href="#">Payment Transfer</a></li>
+                <li><a href="#">Connect Bank</a></li>
+            </ul>
+        </nav>
+        
+        <div class="user-details">
+            <img src="./Resources/profile picture.jpg" alt="Profile Picture" class="profile-pic">
+            <div class="user-info">
+                <div>Aditya V</div>
+                <div style="color: #888; font-size: 12px;">Aditya@gmail.com</div>
+            </div>
+            <img src="./Resources/log out.png" alt="Logout Icon" class="logout">
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="main-content">
+        <h1>Welcome, <span class="highlighted-text">Aditya V</span></h1>
+        <p>Access & manage your account and transactions efficiently.</p>
+
+        <!-- Recent Transactions -->
+<div class="recent-transactions">
+    <h1>Transaction History</h1>
+    <div class="transactions-tabs">
+        <button class="tab active">Bank of America</button>
+        <button class="tab">Bank of Australia</button>
+    </div>
+    <div class="transaction-list">
+        <!-- Existing Transactions -->
+        <div class="transaction-item">
+            <div class="transaction-description">
+                <img src="./Resources/spotify.png" alt="Spotify Logo" class="transaction-logo">
+                <span class="transaction-title">Spotify</span>
+                <span class="transaction-time">Wed 1:00pm</span>
+            </div>
+            <div class="transaction-amount">- $6.00</div>
+            <div class="transaction-status">Processing</div>
+            <div class="transaction-category">Entertainment</div>
+            <div class="transaction-category">Subscriptions</div>
+        </div>
+        <div class="transaction-item">
+            <div class="transaction-description">
+                <img src="./Resources/netflix.png" alt="Netflix Logo" class="transaction-logo">
+                <span class="transaction-title">Netflix</span>
+                <span class="transaction-time">Thu 2:00pm</span>
+            </div>
+            <div class="transaction-amount-done">- $15.00</div>
+            <div class="transaction-status-done">Processed</div>
+            <div class="transaction-category">Entertainment</div>
+            <div class="transaction-category">Subscriptions</div>
+        </div>
+        
+        <div class="transaction-item">
+            <div class="transaction-description">
+                <img src="./Resources/mobilerech.webp" alt="Mobile Recharge Logo" class="transaction-logo">
+                <span class="transaction-title">Recharge</span>
+                <span class="transaction-time">Fri 3:15pm</span>
+            </div>
+            <div class="transaction-amount">- $20.00</div>
+            <div class="transaction-status">Processing</div>
+            <div class="transaction-category">Utilities</div>
+            <div class="transaction-category">Services</div>
+        </div>
+        
+        <div class="transaction-item">
+            <div class="transaction-description">
+                <img src="./Resources/electricity.png" alt="Electricity Bill Logo" class="transaction-logo">
+                <span class="transaction-title">Electricity</span>
+                <span class="transaction-time">Sat 4:45pm</span>
+            </div>
+            <div class="transaction-amount-done">- $50.00</div>
+            <div class="transaction-status-done">Paid</div>
+            <div class="transaction-category">Utilities</div>
+            <div class="transaction-category">Services</div>
+        </div>
+        
+        <div class="transaction-item">
+            <div class="transaction-description">
+                <img src="./Resources/user.png" alt="User Logo" class="transaction-logo">
+                <span class="transaction-title">Alice</span>
+                <span class="transaction-time">Mon 10:30am</span>
+            </div>
+            <div class="transaction-amount-credit">+ $200.00</div>
+            <div class="transaction-status-done">Completed</div>
+            <div class="transaction-category">Transfer</div>
+            <div class="transaction-category">Creditted</div>
+        </div>
+        
+        <div class="transaction-item">
+            <div class="transaction-description">
+                <img src="./Resources/user.png" alt="User Logo" class="transaction-logo">
+                <span class="transaction-title">Bob</span>
+                <span class="transaction-time">Sun 5:20pm</span>
+            </div>
+            <div class="transaction-amount">- $120.00</div>
+            <div class="transaction-status-done">Completed</div>
+            <div class="transaction-category">Transfer</div>
+            <div class="transaction-category">Debitted</div>
+        </div>
+        
+        <div class="transaction-item">
+            <div class="transaction-description">
+                <img src="./Resources/walmart.png" alt="Walmart Logo" class="transaction-logo">
+                <span class="transaction-title">Walmart</span>
+                <span class="transaction-time">Tue 1:40pm</span>
+            </div>
+            <div class="transaction-amount">- $75.00</div>
+            <div class="transaction-status">Pending</div>
+            <div class="transaction-category">Products</div>
+            <div class="transaction-category">Shopping</div>
+        </div>
+        
+        <div class="transaction-item">
+            <div class="transaction-description">
+                <img src="./Resources/uber.png" alt="Uber Logo" class="transaction-logo">
+                <span class="transaction-title">Uber</span>
+                <span class="transaction-time">Wed 8:30pm</span>
+            </div>
+            <div class="transaction-amount">- $15.50</div>
+            <div class="transaction-status-done">Completed</div>
+            <div class="transaction-category">Convenience</div>
+            <div class="transaction-category">Transportation</div>
+        </div>
+        
+        <div class="transaction-item">
+            <div class="transaction-description">
+                <img src="./Resources/salary.jpg" alt="Salary Logo" class="transaction-logo">
+                <span class="transaction-title">Salary</span>
+                <span class="transaction-time">Fri 9:00am</span>
+            </div>
+            <div class="transaction-amount-credit">+ $3000.00</div>
+            <div class="transaction-status-done">Received</div>
+            <div class="transaction-category">Money_Order</div>
+            <div class="transaction-category">Income</div>
+        </div>
+        
+        <div class="transaction-item">
+            <div class="transaction-description">
+                <img src="./Resources/gas.png" alt="Gas Bill Logo" class="transaction-logo">
+                <span class="transaction-title">Gas</span>
+                <span class="transaction-time">Sat 10:10am</span>
+            </div>
+            <div class="transaction-amount-done">- $30.00</div>
+            <div class="transaction-status-done">Paid</div>
+            <div class="transaction-category">Utilities</div>
+            <div class="transaction-category">Services</div>
+        </div>
+        
+        <div class="transaction-item">
+            <div class="transaction-description">
+                <img src="./Resources/water.jpg" alt="Water Bill Logo" class="transaction-logo">
+                <span class="transaction-title">Water</span>
+                <span class="transaction-time">Thu 11:30am</span>
+            </div>
+            <div class="transaction-amount">- $25.00</div>
+            <div class="transaction-status">Processing</div>
+            <div class="transaction-category">Utilities</div>
+            <div class="transaction-category">Services</div>
+        </div>
+        
+        <div class="transaction-item">
+            <div class="transaction-description">
+                <img src="./Resources/cinema.png" alt="Cinema Logo" class="transaction-logo">
+                <span class="transaction-title">Movie</span>
+                <span class="transaction-time">Sun 6:45pm</span>
+            </div>
+            <div class="transaction-amount">- $18.00</div>
+            <div class="transaction-status-done">Completed</div>
+            <div class="transaction-category">Entertainment</div>
+            <div class="transaction-category">Pass</div>
+
+            <!-- Additional transactions can be added here -->
+            </div>
+        </div>
+    </div>
+
+    <script src="dashboard_script.js"></script>
+</body>
+</html>
