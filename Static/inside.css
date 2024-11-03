@@ -47,6 +47,7 @@ body {
     display: flex;
     align-items: center;
     font-size: 16px;
+    padding: 10px 16px;
 }
 
 .sidebar nav ul li a.selected {
@@ -56,6 +57,11 @@ body {
 
 .sidebar .logout {
     width: 26px;
+}
+
+.sidebar nav ul li a:hover {
+    background-color: rgba(200, 200, 200, 0.5);
+    border-radius: 10px;
 }
 
 /* Main content */
