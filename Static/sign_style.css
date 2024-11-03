@@ -288,3 +288,42 @@ button[type="submit"]:hover {
     max-height: 100%;
     border-radius: 8px;
 }
+
+/* Tooltip Styling */
+.tooltip {
+    position: relative;
+    cursor: pointer;
+    font-weight: bold;
+    color: #0072ff;
+    margin-left: 5px;
+    float: right;
+}
+
+/* Tooltip Text */
+.tooltip::after {
+    content: "Social Security Number - A unique number typically provided by the bank in your email or registered phone number.";
+    position: absolute;
+    bottom: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #333;
+    color: #fff;
+    padding: 8px;
+    border-radius: 4px;
+    font-size: 12px;
+    visibility: hidden;
+    opacity: 0;
+    transition: opacity 0.2s ease, visibility 0.2s ease;
+    pointer-events: none;
+    width: 150px; /* Increased width for a larger box */
+    white-space: normal; /* Allow text to wrap */
+    text-align: left; /* Align text to the left for readability */
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2); /* Added shadow for emphasis */
+}
+
+/* Show Tooltip on Hover */
+.tooltip:hover::after {
+    visibility: visible;
+    opacity: 1;
+}
+
