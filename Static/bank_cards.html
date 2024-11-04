@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,6 +8,7 @@
     <link rel="stylesheet" href="sidebar.css">
     <link rel="stylesheet" href="bank_cards.css">
 </head>
+
 <body>
     <!-- Sidebar -->
     <div class="sidebar">
@@ -15,19 +17,19 @@
             <ul>
                 <li><a href="/dashboard">Home</a></li>
                 <li><a href="#" class="selected">My Banks</a></li>
-                <li><a href="#">Transaction History</a></li>
+                <li><a href="/transaction_history">Transaction History</a></li>
                 <li><a href="/payment_transfer">Payment Transfer</a></li>
                 <li><a href="/connect-account">Connect Bank</a></li>
             </ul>
         </nav>
-        
+
         <div class="user-details">
             <img src="./Resources/profile picture.jpg" alt="Profile Picture" class="profile-pic">
             <div class="user-info">
                 <div class="fullname">Loading...</div>
                 <div class="email" style="color: #888; font-size: 12px;">Loading...</div>
             </div>
-            <img src="./Resources/log out.png" alt="Logout Icon" class="logout">
+            <a href="/logout"><img src="./Resources/log out.png" alt="Logout Icon" class="logout"></a>
         </div>
     </div>
 
@@ -36,7 +38,7 @@
             <h1>My Bank Accounts</h1>
             <p>Effortlessly Manage Your Banking Activities</p>
         </header>
-        
+
         <section class="cards-container">
             <div class="card blue">
                 <p class="bank-name">Horizon Banking</p>
@@ -73,13 +75,6 @@
                 <p class="spending">Account Balance: $2,840.40</p>
                 <img src="./Resources/card logo 1.png" alt="Company Logo" class="company-logo"> <!-- Add logo -->
             </div>
-            <div class="card purple">
-                <p class="bank-name">Bank of Pakistan</p>
-                <p class="card-holder">VNS KARTHIK</p>
-                <p class="card-number">•••• •••• •••• 1234</p> <!-- Masked card number -->
-                <p class="spending">Account Balance: $2,840.40</p>
-                <img src="./Resources/card logo 3.png" alt="Company Logo" class="company-logo"> <!-- Add logo -->
-            </div>
         </section>
     </div>
     <script>
@@ -105,6 +100,45 @@
                     console.error('There was a problem with the fetch operation:', error);
                 });
         });
+
+        ///////////// To get bank accounts //////////////
+        document.addEventListener('DOMContentLoaded', () => {
+            // Fetch user details
+            fetch('/user-info')
+                .then(response => response.json())
+                .then(data => {
+                    const fullname = `${data.firstname} ${data.lastname}`;
+                    document.querySelector('.fullname').textContent = fullname;
+                    document.querySelector('.email').textContent = data.email;
+                })
+                .catch(error => console.error('Error fetching user info:', error));
+
+            // Fetch bank account details
+            fetch('/api/banks')
+                .then(response => response.json())
+                .then(accounts => {
+                    const container = document.querySelector('.cards-container');
+                    container.innerHTML = ''; // Clear any existing content
+
+                    accounts.forEach(account => {
+                        const card = document.createElement('div');
+                        card.classList.add('card', 'blue'); // Add card styling classes
+                        console.log(account);
+                        // Populate card with account details
+                        card.innerHTML = `
+                        <p class="bank-name">${account.bankname}</p>
+                        <p class="card-holder">${account.accountname}</p>
+                        <p class="card-number">${account.accountnumber}</p>
+                        <p class="spending">Account Balance: $${account.accountbalance.toFixed(2)}</p>
+                        <img src="./Resources/card logo 1.png" alt="Company Logo" class="company-logo">`;
+
+                        container.appendChild(card); // Append card to container
+                    });
+                })
+                .catch(error => console.error('Error fetching bank accounts:', error));
+        });
+
     </script>
 </body>
+
 </html>

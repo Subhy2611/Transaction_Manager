@@ -42,6 +42,7 @@ var dbusers = db.model('usercollection', userSchema);
 
 const accountSchema = new mongoose.Schema({
     email: String,
+    accountname: String,
     accountnumber: Number,
     bankname: String,
     accounttype: String,
@@ -157,10 +158,38 @@ app.get('/mybanks', (req, res) => {
         res.send('<script>alert("Please login first");window.open("/", "_self");</script>');
     }
 });
+app.get('/api/banks', async (req, res) => {
+    const user = req.session.myVariable;
+    console.log(user);
+    if (user) {
+        try {
+            const accounts = await dbaccounts.find({ email: user.email });
+            if (accounts.length > 0) {
+                res.json(accounts);
+                console.log(accounts);
+            } else {
+                console.log('No account found');
+                res.status(404).json({ error: 'No accounts found for user' });
+            }
+        } catch (error) {
+            console.error('Error fetching accounts:', error);
+            res.status(500).json({ error: 'Internal server error' });
+        }
+    } else {
+        res.status(401).json({ error: 'Unauthorized' });
+    }
+});
 //////////////// End of My Banks //////////////////
 
 //////////////// Transaction History //////////////////
-
+app.get('/transaction_history', (req, res) => {
+    if(req.session.myVariable){
+        res.sendFile(path.join(__dirname, './Static/transaction_history.html'));
+    }
+    else{
+        res.send('<script>alert("Please login first");window.open("/", "_self");</script>');
+    }
+});
 //////////////// End of Transaction History //////////////////
 
 //////////////// Payment Transfer //////////////////

@@ -61,3 +61,34 @@ document.addEventListener('DOMContentLoaded', () => {
             console.error('There was a problem with the fetch operation:', error);
         });
 });
+
+document.addEventListener('DOMContentLoaded', () => {
+    // Fetch user info for displaying name and email
+    fetch('/user-info')
+        .then(response => response.json())
+        .then(data => {
+            document.querySelector('.fullname').textContent = `${data.firstname} ${data.lastname}`;
+            document.querySelector('.email').textContent = data.email;
+            document.querySelector('.highlighted-text').textContent = `${data.firstname} ${data.lastname}`;
+        })
+        .catch(error => console.error('Error fetching user info:', error));
+
+    // Fetch bank account details for balance and chart update
+    fetch('/api/banks')
+        .then(response => response.json())
+        .then(accounts => {
+            // Calculate total balance
+            const totalBalance = accounts.reduce((sum, acc) => sum + acc.accountbalance, 0);
+            document.querySelector('.balance-info h1').textContent = `$${totalBalance.toFixed(2)}`;
+
+            // Update chart data
+            const labels = accounts.map(acc => acc.bankname);
+            const data = accounts.map(acc => acc.accountbalance);
+
+            // Update and re-render the chart
+            balanceChart.data.labels = labels;
+            balanceChart.data.datasets[0].data = data;
+            balanceChart.update();
+        })
+        .catch(error => console.error('Error fetching accounts:', error));
+});

@@ -27,7 +27,7 @@
                 <div class="fullname">Loading...</div>
                 <div class="email" style="color: #888; font-size: 12px;">Loading...</div>
             </div>
-            <img src="./Resources/log out.png" alt="Logout Icon" class="logout">
+            <a href="/logout"><img src="./Resources/log out.png" alt="Logout Icon" class="logout"></a>
         </div>
     </div>
 
@@ -192,6 +192,30 @@
         </div>
     </div>
 
-    <script src="dashboard_script.js"></script>
+    <script>
+        ///////////// To get username and email //////////////
+        document.addEventListener('DOMContentLoaded', () => {
+            fetch('/user-info')
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Network response was not ok');
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    console.log(data);
+                    const firstname = data.firstname;
+                    const lastname = data.lastname;
+                    const email = data.email;
+                    const fullname = `${firstname} ${lastname}`;
+                    document.querySelector('.fullname').textContent = fullname;
+                    document.querySelector('.email').textContent = email;
+                    document.querySelector('.highlighted-text').textContent = fullname;
+                })
+                .catch(error => {
+                    console.error('There was a problem with the fetch operation:', error);
+                });
+        });
+    </script>
 </body>
 </html>

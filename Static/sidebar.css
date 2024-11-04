@@ -50,12 +50,18 @@ body {
     padding: 10px 16px;
 }
 
+.sidebar nav ul li a.selected {
+    color: #007bff;
+    font-weight: bold;
+}
+
 .sidebar .logout {
     width: 26px;
 }
 
 .sidebar nav ul li a:hover {
     background-color: #007bff;
+    color: white;
     border-radius: 10px;
 }
 
@@ -77,10 +83,10 @@ body {
 
 .user-details .user-info {
     font-size: 14px;
+    width: 60%;
 }
 
 .user-details img.logout {
-    margin-left: auto;
     cursor: pointer;
     width: 26px;
 }
