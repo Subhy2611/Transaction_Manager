@@ -15,7 +15,7 @@ body {
     border-right: 1px solid #e6e8eb;
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
+    justify-content:flex-start;
     height: 100vh; /* Full viewport height */
     position: fixed; /* Fix sidebar position */
     left: 0; /* Align sidebar to the left */
@@ -50,17 +50,12 @@ body {
     padding: 10px 16px;
 }
 
-.sidebar nav ul li a.selected {
-    color: #007bff;
-    font-weight: bold;
-}
-
 .sidebar .logout {
     width: 26px;
 }
 
 .sidebar nav ul li a:hover {
-    background-color: rgba(200, 200, 200, 0.5);
+    background-color: #007bff;
     border-radius: 10px;
 }
 
@@ -70,6 +65,7 @@ body {
     align-items: center;
     padding: 15px 1%;
     border-top: 1px solid #e6e8eb;
+    margin-top: auto;
 }
 
 .user-details img.profile-pic {
