@@ -13,19 +13,19 @@
         <img src="./Resources/horizon logo.png" alt="Logo" class="logo">
         <nav>
             <ul>
-                <li><a href="#">Home</a></li>
-                <li><a href="#">My Banks</a></li>
+                <li><a href="/dashboard">Home</a></li>
+                <li><a href="/mybanks">My Banks</a></li>
                 <li><a href="#">Transaction History</a></li>
                 <li><a href="#" class="selected">Payment Transfer</a></li>
-                <li><a href="#">Connect Bank</a></li>
+                <li><a href="/connect-account">Connect Bank</a></li>
             </ul>
         </nav>
         
         <div class="user-details">
             <img src="./Resources/profile picture.jpg" alt="Profile Picture" class="profile-pic">
             <div class="user-info">
-                <div>Aditya V</div>
-                <div style="color: #888; font-size: 12px;">Aditya@gmail.com</div>
+                <div class="fullname">Loading...</div>
+                <div class="email" style="color: #888; font-size: 12px;">Loading...</div>
             </div>
             <img src="./Resources/log out.png" alt="Logout Icon" class="logout">
         </div>
@@ -46,8 +46,8 @@
                 <!-- Select Source Bank -->
                 <div class="form-group">
                     <label for="source-bank">Select Source Bank</label>
-                    <select id="source-bank" required>
-                        <option value="">Select Account</option>
+                    <select id="source-bank" name="senderaccountnum">
+                        <option value="" disabled>Select Account</option>
                     </select>
                 </div>
 
@@ -55,7 +55,7 @@
                 <!-- Transfer Note -->
                 <div class="form-group">
                     <label for="transfer-note">Transfer Note (Optional)</label>
-                    <textarea id="transfer-note" maxlength="200" placeholder="Dear John, I hope this message finds you well. I am transferring $100 to your account for fun."></textarea>
+                    <textarea id="transfer-note" maxlength="200" name="note" placeholder="Dear John, I hope this message finds you well. I am transferring $100 to your account for fun."></textarea>
                 </div>
                 <hr>
             </div>
@@ -68,19 +68,19 @@
                 <hr>
                 <div class="form-group">
                     <label for="recipient-email">Recipient's Email Address</label>
-                    <input type="email" id="recipient-email" placeholder="john@gmail.com" required>
+                    <input type="email" id="recipient-email" name="recipientemailaddress" placeholder="john@gmail.com" required>
                 </div>
 
                 <hr>
                 <div class="form-group">
                     <label for="account-number">Recipient's Bank Account Number</label>
-                    <input type="number" id="account-number" placeholder="Enter the account number" required>
+                    <input type="number" name="recipientaccountnumber" id="account-number" placeholder="Enter the account number" required>
                 </div>
 
                 <hr>
                 <div class="form-group">
                     <label for="amount">Amount</label>
-                    <input type="number" id="amount" placeholder="40000" min="1" required>
+                    <input type="number" id="amount" name="amount" placeholder="40000" min="1" required>
                 </div>
                 <hr>
             </div>
@@ -89,6 +89,50 @@
             <button type="submit" class="transfer-button">Transfer Funds</button>
         </form>
     </div>
+    <script>
+        // Fetch the source bank accounts
+        fetch('/api/banks')
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Failed to fetch bank accounts');
+                }
+                return response.json();
+            })
+            .then(data => {
+                const sourceBankSelect = document.getElementById('source-bank');
+                data.forEach(bank => {
+                    const option = document.createElement('option');
+                    option.value = bank.accountnumber;
+                    option.innerText = `${bank.bankname} - ${bank.accountnumber}`;
+                    sourceBankSelect.appendChild(option);
+                });
+            })
+            .catch(error => {
+                console.error('Error loading bank accounts:', error);
+            });
 
+            ///////////// To get username and email //////////////
+            document.addEventListener('DOMContentLoaded', () => {
+                fetch('/user-info')
+                    .then(response => {
+                        if (!response.ok) {
+                            throw new Error('Network response was not ok');
+                        }
+                        return response.json();
+                    })
+                    .then(data => {
+                        console.log(data);
+                        const firstname = data.firstname;
+                        const lastname = data.lastname;
+                        const email = data.email;
+                        const fullname = `${firstname} ${lastname}`;
+                        document.querySelector('.fullname').textContent = fullname;
+                        document.querySelector('.email').textContent = email;
+                    })
+                    .catch(error => {
+                        console.error('There was a problem with the fetch operation:', error);
+                    });
+            });
+    </script>    
 </body>
 </html>

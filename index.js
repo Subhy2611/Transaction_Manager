@@ -4,6 +4,7 @@ const path = require('path')
 const app = express();
 const port = 3000;
 const session = require('express-session'); // To manage sessions
+const { time } = require('console');
 
 app.use(express.static(path.join(__dirname, './Static')));
 
@@ -43,7 +44,6 @@ const accountSchema = new mongoose.Schema({
     email: String,
     accountnumber: Number,
     bankname: String,
-    customernumber: Number,
     accounttype: String,
     accountbalance: Number,
     openingdate: Date
@@ -52,17 +52,20 @@ var dbaccounts = db.model('accountscollection', accountSchema);
 
 const transactionSchema = new mongoose.Schema({
     senderemail: String,
-    senderbank: String,
+    // senderbank: String,
     note: String,
     senderaccountnum: Number,
-    receipientemailaddress: String,
-    recepientaccountnumber: Number,
+    status: String,
+    // type: String,
+    timestamp: Date,
+    recipientemailaddress: String,
+    recipientaccountnumber: Number,
     amount: Number
 })
 var dbtransaction = db.model('transactioncollection', transactionSchema);
 ///////////////// End of MongoDB Connection //////////////////
 
-
+//////////////// Sign in and Sign up //////////////////
 app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, './Static/sign in.html'));
 });
@@ -73,10 +76,10 @@ app.post('/login', async (req, res) => {
         const password = req.body.password;
         console.log(email, password);
         const user = await dbusers.findOne({ email: email });
-        console.log(user);
+        // console.log(user);
         if (user && user.password === password) {
             console.log('User login successful');
-            req.session.myVariable = user.email;
+            req.session.myVariable = user;
             res.send('<script>alert("User login successful");window.open("/dashboard", "_self");</script>');
         } else {
             console.log('Invalid email or password');
@@ -118,7 +121,9 @@ app.post('/adduser', async (req, res) => {
         res.status(500).send('Error adding user');
     }
 });
+//////////////// End of Sign in and Sign up //////////////////
 
+//////////////// Home Page //////////////////
 app.get('/dashboard', (req, res) => {
     if(req.session.myVariable){
         res.sendFile(path.join(__dirname, './Static/dashboard.html'));
@@ -128,6 +133,37 @@ app.get('/dashboard', (req, res) => {
     }
 });
 
+app.get('/user-info', (req, res) => {
+    const user = req.session.myVariable;
+    console.log(user);
+    if (user) {
+        res.json({ 
+            firstname: user.firstname,
+            lastname: user.lastname, 
+            email: user.email 
+        });;
+    } else {
+        res.status(401).json({ error: 'Unauthorized' });
+    }
+});
+//////////////// End of Home Page //////////////////
+
+//////////////// My Banks //////////////////
+app.get('/mybanks', (req, res) => {
+    if(req.session.myVariable){
+        res.sendFile(path.join(__dirname, './Static/bank_cards.html'));
+    }
+    else{
+        res.send('<script>alert("Please login first");window.open("/", "_self");</script>');
+    }
+});
+//////////////// End of My Banks //////////////////
+
+//////////////// Transaction History //////////////////
+
+//////////////// End of Transaction History //////////////////
+
+//////////////// Payment Transfer //////////////////
 app.get('/payment_transfer', (req, res) => {
     if(req.session.myVariable){
         res.sendFile(path.join(__dirname, './Static/payment_transfer.html'));
@@ -136,6 +172,97 @@ app.get('/payment_transfer', (req, res) => {
         res.send('<script>alert("Please login first");window.open("/", "_self");</script>');
     }
 });
+
+app.get('/api/banks', async (req, res) => {
+    const user = req.session.myVariable;
+    console.log(user);
+    if (user) {
+        try {
+            const accounts = await dbaccounts.find({ email: user.email });
+            if (accounts.length > 0) {
+                res.json(accounts);
+                console.log(accounts);
+            } else {
+                console.log('No account found');
+                res.status(404).json({ error: 'No accounts found for user' });
+            }
+        } catch (error) {
+            console.error('Error fetching accounts:', error);
+            res.status(500).json({ error: 'Internal server error' });
+        }
+    } else {
+        res.status(401).json({ error: 'Unauthorized' });
+    }
+});
+
+
+app.post('/transfer', async (req, res) => {
+    try {
+        const senderemail = req.session.myVariable.email;
+        const senderbank = req.body.senderbank;
+        const note = req.body.note;
+        const status = req.body.status;
+        const type = req.body.type;
+        const timestamp = Date.now();
+        const senderaccountnum = req.body.senderaccountnum;
+        const recipientemailaddress = req.body.recipientemailaddress;
+        const recipientaccountnumber = req.body.recipientaccountnumber;
+        const amount = req.body.amount;
+        console.log(senderemail, senderbank, note, status, type, timestamp, senderaccountnum, recipientemailaddress, recipientaccountnumber, amount);
+        const newTransaction = new dbtransaction({
+            senderemail: senderemail,
+            // senderbank: senderbank,
+            note: note,
+            status: status,
+            type: type,
+            timestamp: timestamp,
+            senderaccountnum: senderaccountnum,
+            recipientemailaddress: recipientemailaddress,
+            recipientaccountnumber: recipientaccountnumber,
+            amount: amount
+        });
+        console.log(newTransaction);
+        await newTransaction.save();
+        res.send('<script>alert("Transaction successful");window.open("/dashboard", "_self");</script>');
+    } catch (err) {
+        console.error('Error adding transaction:', err);
+        res.status(500).send('Error adding transaction');
+    }
+});
+//////////////// End of Payment Transfer //////////////////
+
+//////////////// Connect Account //////////////////
+app.get('/connect-account', (req, res) => {
+    if(req.session.myVariable){
+        res.sendFile(path.join(__dirname, './Static/connect_bank.html'));
+    }
+    else{
+        res.send('<script>alert("Please login first");window.open("/", "_self");</script>');
+    }
+});
+
+app.post('/connectbank', async (req, res) => {
+    try {
+        // Create a new account document from form data
+        const newAccount = new dbaccounts({
+            email: req.session.myVariable.email,
+            accountnumber: req.body.accountnumber,
+            bankname: req.body.bankname,
+            accounttype: req.body.accounttype,
+            accountbalance: req.body.accountbalance,
+            openingdate: Date.now()
+        });
+        console.log(newAccount);
+        // Save the new book to the database
+        await newAccount.save();
+        res.send('<script>alert("Account added successfully");window.open("/dashboard", "_self");</script>');
+    }
+    catch (err) {
+        console.error('Error adding account:', err);
+        res.status(500).send('Error adding account');
+    }
+});
+//////////////// End of Connect Account //////////////////
 
 app.get('/logout', (req, res) => {
     req.session.destroy();

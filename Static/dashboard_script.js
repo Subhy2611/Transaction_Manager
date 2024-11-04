@@ -37,3 +37,27 @@ const config = {
 };
 
 const balanceChart = new Chart(ctx, config);
+
+///////////// To get username and email //////////////
+document.addEventListener('DOMContentLoaded', () => {
+    fetch('/user-info')
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            return response.json();
+        })
+        .then(data => {
+            console.log(data);
+            const firstname = data.firstname;
+            const lastname = data.lastname;
+            const email = data.email;
+            const fullname = `${firstname} ${lastname}`;
+            document.querySelector('.fullname').textContent = fullname;
+            document.querySelector('.email').textContent = email;
+            document.querySelector('.highlighted-text').textContent = fullname;
+        })
+        .catch(error => {
+            console.error('There was a problem with the fetch operation:', error);
+        });
+});
