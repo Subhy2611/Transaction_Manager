@@ -3,16 +3,20 @@ const ctx = document.getElementById('balanceChart').getContext('2d');
 
 // Data for the pie chart in shades of blue
 const data = {
-    labels: ['Bank of America', 'Bank of Australia'],
+    labels: [],
     datasets: [{
-        data: [1200.00, 1498.12], // Example balances
+        data: [], // Example balances
         backgroundColor: [
-            'rgba(0, 190, 255, 0.7)', // Blue shade 1
-            'rgba(0, 60, 255, 0.7)'   // Blue shade 2
+            'rgb(73, 206, 252)', // Blue shade 1
+            'rgb(0, 49, 102)',   // Blue shade 2
+            'rgb(0, 86, 179)',   // Blue shade 3
+            'rgb(50, 143, 175)'   // Blue shade 4
         ],
         borderColor: [
-            'rgba(0, 190, 255, 0.7)', // Blue shade 1
-            'rgba(0, 60, 255, 0.7)'   // Blue shade 2
+            'rgb(73, 206, 252)', // Blue shade 1
+            'rgb(0, 49, 102)',  // Blue shade 2
+            'rgb(0, 86, 179)',   // Blue shade 3
+            'rgb(50, 143, 175)'   // Blue shade 4
         ],
         borderWidth: 1
     }]

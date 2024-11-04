@@ -47,7 +47,7 @@
                 <div class="form-group">
                     <label for="source-bank">Select Source Bank</label>
                     <select id="source-bank" name="senderaccountnum">
-                        <option value="" disabled>Select Account</option>
+                        <option value="" disabled selected>Select Account</option>
                     </select>
                 </div>
 
@@ -80,7 +80,7 @@
                 <hr>
                 <div class="form-group">
                     <label for="amount">Amount</label>
-                    <input type="number" id="amount" name="amount" placeholder="40000" min="1" required>
+                    <input type="number" id="amount" name="amount" placeholder="40000" min="1" step=".01" required>
                 </div>
                 <hr>
             </div>

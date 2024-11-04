@@ -275,6 +275,7 @@ app.post('/connectbank', async (req, res) => {
         // Create a new account document from form data
         const newAccount = new dbaccounts({
             email: req.session.myVariable.email,
+            accountname: req.session.myVariable.firstname + " " + req.session.myVariable.lastname,
             accountnumber: req.body.accountnumber,
             bankname: req.body.bankname,
             accounttype: req.body.accounttype,

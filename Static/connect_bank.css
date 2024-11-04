@@ -1,4 +1,3 @@
-/* Base Styles */
 * {
     box-sizing: border-box;
     margin: 0;
@@ -6,120 +5,38 @@
     font-family: Arial, sans-serif;
 }
 
-body {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 100vh;
-    background-color: #f0f4fc;
-}
-
-/* Container Styling */
-.main-container {
-    display: flex;
-    width: 80%;
-    max-width: 1200px;
-    background-color: white;
-    border-radius: 8px;
-    overflow: hidden;
-    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
-}
-
-.left-section {
-    flex: 1;
-    padding: 40px;
-    background-color: #fff;
-    color: #333;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    height: 800px;
-}
-
-.logo h1 {
-    font-size: 24px;
-    color: #0072ff;
-    margin-bottom: 20px;
-}
-
-/* Sidebar Styling */
-.sidebar {
-    width: 15vw;
-    background-color: #ffffff;
-    padding: 1%;
-    border-right: 1px solid #e6e8eb;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    height: 100vh;
-    position: fixed;
-    left: 0;
-    top: 0;
-    overflow-y: auto;
-    box-sizing: border-box;
-}
-
-.sidebar img.logo {
-    width: 150px;
-    margin-bottom: 20px;
-    margin-top: 20px;
-    align-self: center;
-}
-
-.sidebar nav ul {
-    list-style-type: none;
-    margin-left: 20px;
-    padding: 0;
-}
-
-.sidebar nav ul li {
-    margin: 15px 0;
-}
-
-.sidebar nav ul li a {
-    text-decoration: none;
-    color: #333;
-    display: flex;
-    align-items: center;
-    font-size: 16px;
-    padding: 10px 16px;
-}
-
-.sidebar nav ul li a.selected {
-    color: #007bff;
-    font-weight: bold;
-}
-
-.sidebar .logout {
-    width: 26px;
-}
-
-.sidebar nav ul li a:hover {
-    background-color: rgba(200, 200, 200, 0.5);
-    border-radius: 10px;
-}
-
 /* Main Content Styling */
-.main-content {
+.main-content{
     flex-grow: 1;
-    padding: 20px;
-    background-color: #ffffff;
+    padding: 40px;
+    background-color: #f9fbfd;
+    /* max-width: 700px; */
+    overflow-y: auto; /* Enable scrolling for main content */
+    margin-left: 15vw; /* Remove the offset from the sidebar */
+    overflow-y: auto; /* Enable scrolling for main content */
+    flex: auto;
 }
 
-header h1 {
-    font-size: 2rem;
-    color: #1d4ed8;
+.main-content h1 {
+    font-size: 24px;
+    font-weight: 600;
+    margin-bottom: 10px;
 }
 
-header p {
-    margin-top: 5px;
+.main-content p {
+    font-size: 14px;
     color: #666;
+    margin-bottom: 30px;
+}
+
+hr {
+    border: 1px solid #eee;
+    margin: 20px 0;
 }
 
 /* Form Styling */
 .connect-bank-form {
-    width: 80%;
+    width: 100%;
     margin: 0 auto;
 }
 
@@ -138,7 +55,7 @@ form {
     display: flex;
     flex-direction: column;
     gap: 20px; /* Ensure there is space between form elements */
-    width: 100%;
+    width: 70%;
 }
 
 .form-group {
@@ -153,7 +70,6 @@ form {
 /* Adjust Input Field Sizes */
 input[type="text"],
 input[type="number"],
-input[type="month"],
 select {
     width: 100%; /* Ensure it takes full width */
     padding: 15px; /* Increase padding */
@@ -162,6 +78,21 @@ select {
     background-color: #f9f9f9;
     color: #333;
     font-size: 16px; /* Increase font size for better readability */
+}
+
+.account-number {
+    display: flex;
+    align-items: center;
+    gap: 5px; /* Space between input fields and hyphens */
+}
+
+.account-number input[type="number"] {
+    width: 50px; /* Set width to fit exactly 4 characters */
+    padding: 5px;
+    text-align: center;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 14px;
 }
 
 /* Button Styling */
@@ -207,62 +138,3 @@ button[type="submit"]:hover {
 .login-link a:hover {
     text-decoration: underline;
 }
-
-/* Additional Section Styling */
-.right-section {
-    flex: 1;
-    background-color: #f3f9ff;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    position: relative;
-}
-
-.image-wrapper {
-    background-color: black;
-    border-radius: 12px;
-    border: 5px solid #000000;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    overflow: hidden;
-    transform: translate(20%, 0);
-}
-
-.image-wrapper img {
-    max-width: 100%;
-    max-height: 100%;
-    border-radius: 8px;
-}
-
-/* Tooltip Styling */
-.tooltip {
-    position: relative;
-    cursor: pointer;
-    font-weight: bold;
-    color: #0072ff;
-    margin-left: 5px;
-    float: right;
-}
-
-.account-number {
-    display: flex;
-    align-items: center;
-    gap: 5px; /* Space between input fields and hyphens */
-}
-
-.account-number input[type="text"] {
-    width: 50px; /* Set width to fit exactly 4 characters */
-    padding: 5px;
-    text-align: center;
-    border: 1px solid #ddd;
-    border-radius: 4px;
-    font-size: 14px;
-}
-
-.hyphen {
-    font-size: 18px;
-    color: #333;
-    margin: 0 2px; /* Adjusts space around the hyphen */
-}
-
