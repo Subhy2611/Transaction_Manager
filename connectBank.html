@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Connect Bank</title>
+    <link rel="stylesheet" href="cb.css">
+    <link rel="stylesheet" href="sidebar.css">
+</head>
+<body>
+    <div class="sidebar">
+        <img src="./Static/Resources/horizon logo.png" alt="Logo" class="logo">
+        <nav>
+            <ul>
+                <li><a href="#">Home</a></li>
+                <li><a href="#">My Banks</a></li>
+                <li><a href="#">Transaction History</a></li>
+                <li><a href="#" class="selected">Payment Transfer</a></li>
+                <li><a href="#">Connect Bank</a></li>
+            </ul>
+        </nav>
+        
+        <div class="user-details">
+            <img src="./Static/Resources/profile picture.jpg" alt="Profile Picture" class="profile-pic">
+            <div class="user-info">
+                <div>Aditya V</div>
+                <div style="color: #888; font-size: 12px;">Aditya@gmail.com</div>
+            </div>
+            <img src="./Static/Resources/log out.png" alt="Logout Icon" class="logout">
+        </div>
+    </div>
+
+    <div class="main">
+        <h1>Connect Bank</h1>
+        <p>Please provide necessary details to create an account and link your Bank</p>
+
+        <div class="connect-bank-form">
+            <form action="/connectbank" method="post">
+              <div class="form-group">
+                <label for="customerName">Bank Name</label>
+                <input
+                  type="text"
+                  id="customerName"
+                  name="customerName"
+                  placeholder="Enter Bank Name"
+                  required
+                />
+              </div>
+  
+              <div class="form-group">
+                  <label for="accountNumber">Account Number</label>
+                  <div class="account-number">
+                    <input
+                      type="number"
+                      id="accountNumber1"
+                      name="accountNumber1"
+                      placeholder="1234"
+                      pattern="\d{4}"
+                      title="Each box should contain exactly 4 numeric characters"
+                      moninput="this.value = this.value.slice(0, 4)"
+                      required
+                    />
+                    <span class="hyphen">-</span>
+                    <input
+                      type="number"
+                      id="accountNumber2"
+                      name="accountNumber2"
+                      placeholder="5678"
+                      pattern="\d{4}"
+                      title="Each box should contain exactly 4 numeric characters"
+                      moninput="this.value = this.value.slice(0, 4)"
+                      required
+                    />
+                    <span class="hyphen">-</span>
+                    <input
+                      type="number"
+                      id="accountNumber3"
+                      name="accountNumber3"
+                      placeholder="9012"
+                      pattern="\d{4}"
+                      title="Each box should contain exactly 4 numeric characters"
+                      oninput="this.value = this.value.slice(0, 4)"
+                      required
+                    />
+                  </div>
+                </div>
+                
+  
+                <div class="form-group">
+                  <label for="accountType">Account Type</label>
+                  <select id="accountType" name="accountType" required>
+                      <option value="" disabled selected>Select Account Type</option>
+                      <option value="savings">Savings</option>
+                      <option value="current">Current</option>
+                      <option value="business">Business</option>
+                  </select>
+              </div>
+              
+              <div class="form-group">
+                  <label for="balance">Balance</label>
+                  <input
+                      type="number"
+                      id="balance"
+                      name="balance"
+                      placeholder="Balance"
+                      required
+                  />
+              </div>
+              
+              <div class="form-group">
+                  <label for="expiryDate">Date of Expiry</label>
+                  <input
+                      type="month"
+                      id="expiryDate"
+                      name="expiryDate"
+                      required
+                  />
+              </div>            
+  
+              <button type="submit">Connect Account</button>
+            </form>
+            <p class="login-link">Need to sign up? <a href="/signup">Sign up</a></p>
+          </div>
+    </div>
+</body>
