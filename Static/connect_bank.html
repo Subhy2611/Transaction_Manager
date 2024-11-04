@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Connect Bank Account</title>
+    <link rel="stylesheet" href="connect_bank.css" />
+  </head>
+  <body>
+    <div class="main-container">
+      <div class="left-section">
+        <div class="logo">
+          <h1>Horizon</h1>
+        </div>
+        <div class="connect-bank-form">
+          <h2>Link Bank Account</h2>
+          <p>Please enter your bank details.</p>
+          <form action="/connectbank" method="post">
+            <div class="form-group">
+              <label for="customerName">Customer Name</label>
+              <input
+                type="text"
+                id="customerName"
+                name="customerName"
+                placeholder="Customer Name"
+                required
+              />
+            </div>
+
+            <div class="form-group">
+                <label for="accountNumber">Account Number</label>
+                <div class="account-number">
+                  <input
+                    type="text"
+                    id="accountNumber1"
+                    name="accountNumber1"
+                    placeholder="1234"
+                    pattern="\d{4}"
+                    title="Each box should contain exactly 4 numeric characters"
+                    maxlength="4"
+                    required
+                  />
+                  <span class="hyphen">-</span>
+                  <input
+                    type="text"
+                    id="accountNumber2"
+                    name="accountNumber2"
+                    placeholder="5678"
+                    pattern="\d{4}"
+                    title="Each box should contain exactly 4 numeric characters"
+                    maxlength="4"
+                    required
+                  />
+                  <span class="hyphen">-</span>
+                  <input
+                    type="text"
+                    id="accountNumber3"
+                    name="accountNumber3"
+                    placeholder="9012"
+                    pattern="\d{4}"
+                    title="Each box should contain exactly 4 numeric characters"
+                    maxlength="4"
+                    required
+                  />
+                </div>
+              </div>
+              
+
+              <div class="form-group">
+                <label for="accountType">Account Type</label>
+                <select id="accountType" name="accountType" required>
+                    <option value="" disabled selected>Select Account Type</option>
+                    <option value="savings">Savings</option>
+                    <option value="current">Current</option>
+                    <option value="business">Business</option>
+                </select>
+            </div>
+            
+            <div class="form-group">
+                <label for="balance">Balance</label>
+                <input
+                    type="number"
+                    id="balance"
+                    name="balance"
+                    placeholder="Balance"
+                    required
+                />
+            </div>
+            
+            <div class="form-group">
+                <label for="expiryDate">Date of Expiry</label>
+                <input
+                    type="month"
+                    id="expiryDate"
+                    name="expiryDate"
+                    required
+                />
+            </div>            
+
+            <button type="submit">Connect Account</button>
+          </form>
+          <p class="login-link">Need to sign up? <a href="/signup">Sign up</a></p>
+        </div>
+      </div>
+      <div class="right-section">
+        <div class="image-wrapper">
+          <img src="./Resources/login right image1.png" alt="Bank Image" />
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
