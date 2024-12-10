@@ -53,6 +53,8 @@ body {
 .sidebar nav ul li a.selected {
     color: #007bff;
     font-weight: bold;
+    border: #0f2e91 solid 2px;
+    border-radius: 10px;
 }
 
 .sidebar .logout {

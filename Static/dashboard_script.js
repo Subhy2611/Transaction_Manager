@@ -1,3 +1,17 @@
+// Function to generate shades of blue based on ratio
+function generateBlueShadesByRatio(count, ratios) {
+    const shades = [];
+    for (let i = 0; i < count; i++) {
+        const ratio = ratios[i];
+        const hue = 190 + (ratio * 50); // Hue for blue(180 to 240)
+        // Map ratio (0 to 1) to lightness from 70% (lightest) to 10% (darkest)
+        const lightness = 70 - (ratio * 60);
+        const shade = `hsl(${hue}, 100%, ${lightness}%)`;
+        shades.push(shade);
+    }
+    return shades;
+}
+
 // Get the context of the canvas element
 const ctx = document.getElementById('balanceChart').getContext('2d');
 
@@ -5,19 +19,9 @@ const ctx = document.getElementById('balanceChart').getContext('2d');
 const data = {
     labels: [],
     datasets: [{
-        data: [], // Example balances
-        backgroundColor: [
-            'rgb(73, 206, 252)', // Blue shade 1
-            'rgb(0, 49, 102)',   // Blue shade 2
-            'rgb(0, 86, 179)',   // Blue shade 3
-            'rgb(50, 143, 175)'   // Blue shade 4
-        ],
-        borderColor: [
-            'rgb(73, 206, 252)', // Blue shade 1
-            'rgb(0, 49, 102)',  // Blue shade 2
-            'rgb(0, 86, 179)',   // Blue shade 3
-            'rgb(50, 143, 175)'   // Blue shade 4
-        ],
+        data: [], // Will be populated dynamically
+        backgroundColor: [], // Will be generated dynamically
+        borderColor: [], // Will be generated dynamically
         borderWidth: 1
     }]
 };
@@ -41,6 +45,33 @@ const config = {
 };
 
 const balanceChart = new Chart(ctx, config);
+
+// Fetch bank account details for balance and chart update
+document.addEventListener('DOMContentLoaded', () => {
+    fetch('/api/banks')
+        .then(response => response.json())
+        .then(accounts => {
+            // Calculate total balance
+            const totalBalance = accounts.reduce((sum, acc) => sum + acc.accountbalance, 0);
+            document.querySelector('.balance-info h1').textContent = `$${totalBalance.toFixed(2)}`;
+
+            // Update chart data
+            const labels = accounts.map(acc => acc.bankname);
+            const data = accounts.map(acc => acc.accountbalance);
+            const ratios = data.map(balance => balance / totalBalance);
+
+            // Generate shades of blue based on the ratio of the amount each account holds
+            const shades = generateBlueShadesByRatio(accounts.length, ratios);
+
+            // Update and re-render the chart
+            balanceChart.data.labels = labels;
+            balanceChart.data.datasets[0].data = data;
+            balanceChart.data.datasets[0].backgroundColor = shades;
+            balanceChart.data.datasets[0].borderColor = shades;
+            balanceChart.update();
+        })
+        .catch(error => console.error('Error fetching accounts:', error));
+});
 
 ///////////// To get username and email //////////////
 document.addEventListener('DOMContentLoaded', () => {
@@ -66,6 +97,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
 });
 
+///////////// To get user name and email //////////////
 document.addEventListener('DOMContentLoaded', () => {
     // Fetch user info for displaying name and email
     fetch('/user-info')
@@ -76,23 +108,36 @@ document.addEventListener('DOMContentLoaded', () => {
             document.querySelector('.highlighted-text').textContent = `${data.firstname} ${data.lastname}`;
         })
         .catch(error => console.error('Error fetching user info:', error));
+});
 
-    // Fetch bank account details for balance and chart update
+    
+/////////////// To get bank names to view transactions //////////////
+document.addEventListener('DOMContentLoaded', () => {      
     fetch('/api/banks')
         .then(response => response.json())
         .then(accounts => {
-            // Calculate total balance
-            const totalBalance = accounts.reduce((sum, acc) => sum + acc.accountbalance, 0);
-            document.querySelector('.balance-info h1').textContent = `$${totalBalance.toFixed(2)}`;
+            // Show all bank names
+            accounts.forEach(account => {
+            const button = document.createElement('button');
+            button.className = 'tab';
+            button.textContent = account.bankname;
+            document.querySelector('.transactions-tabs').appendChild(button);
 
-            // Update chart data
-            const labels = accounts.map(acc => acc.bankname);
-            const data = accounts.map(acc => acc.accountbalance);
+            // Add click fuctionality to selected bank
+            document.querySelector('.transactions-tabs').addEventListener('click', function(event) {
+                // Check if a button was clicked
+                if (event.target.classList.contains('tab')) {
+                    // Remove the 'active' class from all buttons
+                    document.querySelectorAll('.transactions-tabs .tab').forEach(btn => btn.classList.remove('active'));
+                    
+                    // Add the 'active' class to the clicked button
+                    event.target.classList.add('active');
 
-            // Update and re-render the chart
-            balanceChart.data.labels = labels;
-            balanceChart.data.datasets[0].data = data;
-            balanceChart.update();
-        })
-        .catch(error => console.error('Error fetching accounts:', error));
+                    // (Optional) Handle showing transactions for the clicked bank here
+                    console.log(`Selected bank: ${event.target.textContent}`);
+                }
+            });
+        });
+    })
+    .catch(error => console.error('Error fetching accounts:', error));
 });

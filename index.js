@@ -68,6 +68,7 @@ var dbtransaction = db.model('transactioncollection', transactionSchema);
 
 //////////////// Sign in and Sign up //////////////////
 app.get('/', (req, res) => {
+    req.session.destroy();
     res.sendFile(path.join(__dirname, './Static/sign in.html'));
 });
 
@@ -93,6 +94,7 @@ app.post('/login', async (req, res) => {
 });
 
 app.get('/signup', (req, res) => {
+    req.session.destroy();
     res.sendFile(path.join(__dirname, './Static/sign up.html'));
 });
 

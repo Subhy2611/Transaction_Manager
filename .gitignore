@@ -130,3 +130,4 @@ dist
 .pnp.*
 
 bank_server/
+serverstart.bat
